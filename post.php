@@ -119,15 +119,14 @@
             <h6>'.$row["date"].'</h6>
             <hr>
               <div class="blog-post-img">
-                <img src="'.$row["img"].'">
+                <img src="data:image/webp;base64,' . $row["img"] . '">
               </div>            
             <p>&nbsp;&nbsp;'.$row["para"].'</p>';
             
             if($row["img2"] != NULL){
               echo '            
               <div class="blog-post-img">
-                <img src="'.$row["img2"].'">
-              </div>';
+                <img src="data:image/webp;base64,' . $row["img2"] . '">';
             }
               echo '
               <p>&nbsp;&nbsp;'.$row["para2"].'

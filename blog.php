@@ -208,13 +208,12 @@
       echo '
     <div class="blog-box">
         <div class="blog-img">
-            <img src="' . $row['img'] . '">
+            <img src="data:image/webp;base64,' . $row["img"] . '">
         </div>
         <div class="blog-details">
             <h2>' . $row['title'] . '</h2>
             <p>' . $row['par'] . '</p>
-                <input name="id" value="' . $row["id"] . '" type="hidden">
-                <button style="background:transparent; border:none; outline:none;" type="submit" name="post" value="" class="hidden"><a>CONTINUE READING</a></button>
+                <button style="background:transparent; border:none; outline:none;" type="submit" name="post" value="" class="hidden"><a href="post.php?id='.$row["id"].'">CONTINUE READING</a></button>
         </div>
         <h1>' . date("d/m", $date) . '</h1>
     </div>';
