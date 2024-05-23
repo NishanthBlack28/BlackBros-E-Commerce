@@ -66,11 +66,7 @@
           </div>
         </section>
         <?php
-          $conn=mysqli_connect("0.0.0.0","root","root","ecommerce");
-          // Check connection
-          if (!$conn) {
-            die("Connection failed: " . mysqli_connect_error());
-          }
+          include("con-db.php");
           ?>
 
         <section id="Product1" class="section-p1">

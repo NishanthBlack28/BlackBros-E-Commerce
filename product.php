@@ -27,11 +27,7 @@
 <body>
 
 <?php
-$conn = mysqli_connect("0.0.0.0","root","root","22ct19");
-
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
+include("con-db.php");
 
 $items_per_page = 1;
 $current_page = isset($_GET['page']) ? $_GET['page'] : 1;

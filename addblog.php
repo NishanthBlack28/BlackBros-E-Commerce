@@ -24,11 +24,7 @@
     </section>
 
 <?php
-$conn=mysqli_connect("0.0.0.0","root","root","ecommerce");
-// Check connection
-if (!$conn) {
-  die("Connection failed: " . mysqli_connect_error());
-}
+include("con-db.php");
 
 // Check if form is submitted
 if(isset($_POST['submit'])){

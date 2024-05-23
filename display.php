@@ -1,10 +1,6 @@
 <?php
 // Assuming you have a database connection established
- $conn=mysqli_connect("0.0.0.0","root","root","ecommerce");
-// Check connection
-if (!$conn) {
-  die("Connection failed: " . mysqli_connect_error());
-}
+include("con-db.php");
 
 // SQL query to fetch all data from the table
 $sql = "SELECT * FROM products";

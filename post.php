@@ -108,7 +108,7 @@
         </section>      
         <section id="blog-post">
           <?php 
-          $conn=mysqli_connect("0.0.0.0","root","root","ecommerce");
+          include("con-db.php");
           $id=$_GET["id"];
           $sql = "SELECT * FROM blog WHERE id=$id;";
           $result = mysqli_query($conn, $sql);

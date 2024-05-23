@@ -6,11 +6,7 @@ if (!isset($_GET["id"]) || $_GET["id"] == NULL) {
 $current_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 ?>
 <?php
-$conn = mysqli_connect("0.0.0.0", "root", "root", "ecommerce");
-// Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
+include("con-db.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">

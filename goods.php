@@ -208,8 +208,8 @@
             margin: auto;
             padding: 20px;
             border: 1px solid #888;
-            width: 80%;
-            max-width: 500px;
+            width: 100%;
+            max-width: 600px;
             border-radius: 8px;
         }
 
@@ -255,69 +255,216 @@
         <p>Read all case studies about our products!</p>
     </section>
 
-    <section id="blog">
-      <?php
-        include("con-db.php");
-        $items_per_page = 5;
-        $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
-        $start = ($current_page - 1) * $items_per_page;
+        <section id="Product1" class="section-p1">
+          <h2>Featured Products</h2>
+          <p>Summer Collection New modern design</p>
+          <div class="pro-container">
+          <?php
+          include("con-db.php");
+          $query = "SELECT * FROM products";
+          $results = mysqli_query($conn, $query);
+          
+          if (mysqli_num_rows($results) > 0) {
+              while($rows = mysqli_fetch_assoc($results)){    
+                echo '            
+            <div class="pro" onclick="window.location.href=\'sproduct.php?id=' . $rows["id"] . '\'">
+              <img src="data:image/jpeg;base64,' . $rows["img1"] . '" alt=""/>
+              <div class="dis">
+                <span>' . $rows["brand"] . '</span>
+                <h5>' . $rows["name"] . '</h5>';
+                echo '<div class="star">';
+                $i = 1;
+                while ($i <= 5) {
+                    echo '<i class="fas fa-star" style="color: ' . ($i <= $rows["rating"] ? '#edb808' : '#dae2e4bc') . ';"></i>';
+                    ++$i;
+                }
+                echo '</div>';
 
-        $sql = "SELECT id, title, date, img, CONCAT(SUBSTRING_INDEX(para, ' ', 20), '...') AS par FROM blog LIMIT $start, $items_per_page";
-        $result = mysqli_query($conn, $sql);
-
-        while ($row = mysqli_fetch_assoc($result)) {
-            $date = strtotime($row['date']);
-            echo '
-            <div class="blog-box">
-                <div class="blog-img">
-                    <img src="data:image/webp;base64,' . $row["img"] . '">
-                </div>
-                <div class="blog-details">
-                    <h2>' . $row['title'] . '</h2>
-                    <p>' . $row['par'] . '</p>
-                    <button style="background:transparent; border:none; outline:none;" type="submit" name="post" value="" class="hidden"><a href="post.php?id=' . $row["id"] . '">CONTINUE READING</a></button>
-                </div>
-                <h1>' . date("d/m", $date) . '</h1>
+                echo '<h4>&#8377; ' . $rows["price"] . '</h4>
+              </div>
+              <form method="post">
+                  <input name="product_id" value="' . $rows["id"] . '" type="hidden">
+                  <button style="background:transparent; border:none; outline:none;" type="submit" name="product_add_cart" value="" class="hidden"><a><i class="fa-solid fa-cart-shopping cart"></i></a></a></button>
+              </form>              
+              
             </div>';
-        }
-
-        mysqli_close($conn);
-        ?>
-    </section>
-
-<?php
-$items_per_page = 5;
-$current_page = isset($_GET['page']) ? $_GET['page'] : 1;
-$start = ($current_page - 1) * $items_per_page;
-
-$sql_count = "SELECT COUNT(*) AS total FROM blog";
-$result_count = mysqli_query($conn, $sql_count);
-$row_count = mysqli_fetch_assoc($result_count);
-$total_items = $row_count['total'];
-$total_pages = 1;
-$total_pages = ceil($total_items / $items_per_page);
-
-$sql = "SELECT * FROM blog LIMIT $start, $items_per_page";
-$result = mysqli_query($conn, $sql);
-?>
-
-<section id="pagination" class="section-p1">
-<?php
-  if ($current_page > 1) {
-    echo '<a href="?page=' . ($current_page - 1) . '" class="pagination"><b>&lsaquo;&lsaquo;</b></a>'; 
-  }
-  
-  echo '<a href="?page=1"class="pagination"><b>&lsaquo;</b></a>';
-  
-  for ($i = max(1, $current_page - 1); $i <= min($current_page + 1, $total_pages); $i++) {
-    echo '<a' . ($current_page == $i ? ' class="active bold blod1 pagination"' : '') . ' class="bold pagination" href="?page=' . $i . '">' . $i . '</a>';
-  }
-  if ($current_page < $total_pages) {
-    echo '<a href="?page=' . ($current_page + 1) . '"class="pagination"><b>&rsaquo;</b></a>'; 
-  }
-  echo '<a href="?page=' . $total_pages . '"class="pagination"><b>&rsaquo;&rsaquo;</b></a>'; 
-  ?>
-</section>
+              }
+            }
+          ?>            
+          </div>
+        </section>
+        
+        <section id="banner" class="section-m1">
+          <h4>Repair Service</h4>
+          <h2>Up to <span>70% off</span> - All dress and accessories</h2>
+          <button class="normal">Explore More</button>
+        </section>
+        
+        <section id="Product1" class="section-p1">
+          <h2>New Arrivals</h2>
+          <p>Summer Collection New modern design</p>
+          <div class="pro-container">
+            <div class="pro">
+              <img src="img/products/n1.jpg" alt=""/>
+              <div class="dis">
+                <span>Noro</span>
+                <h5>Formal buley-white shirt </h5>
+                <div class="star">
+                  <i class="fas fa-star" style="color: #edb808"></i>
+                 <i class="fas fa-star" style="color:#edb808"></i>
+                 <i class="fas fa-star" style="color:#edb808"></i>
+                 <i class="fas fa-star" style="color:#edb808"></i>
+                 <i class="fas fa-star" style="color:#dae2e4bc"></i>
+                </div>
+                <h4>$6.01</h4>
+              </div>
+              <a href=""><i class="fa-solid fa-cart-shopping cart"></i></a></a>
+            </div>
+            <div class="pro">
+              <img src="img/products/n2.jpg" alt=""/>
+              <div class="dis">
+                <span>Manoto</span>
+                <h5>Formal dirty gray shirt </h5>
+                <div class="star">
+                  <i class="fas fa-star" style="color: #edb808"></i>
+                 <i class="fas fa-star" style="color:#edb808"></i>
+                 <i class="fas fa-star" style="color:#dae2e4bc"></i>
+                 <i class="fas fa-star" style="color:#dae2e4bc"></i>
+                 <i class="fas fa-star" style="color:#dae2e4bc"></i>
+                </div>
+                <h4>$12.34</h4>
+              </div>
+              <a href=""><i class="fa-solid fa-cart-shopping cart"></i></a></a>
+            </div>
+            <div class="pro">
+              <img src="img/products/n3.jpg" alt=""/>
+              <div class="dis">
+                <span>Jokees</span>
+                <h5>Formal white shirt</h5>
+                <div class="star">
+                  <i class="fas fa-star" style="color: #edb808"></i>
+                 <i class="fas fa-star" style="color:#edb808"></i>
+                 <i class="fas fa-star" style="color:#edb808"></i>
+                 <i class="fas fa-star" style="color:#edb808"></i>
+                 <i class="fas fa-star" style="color:#dae2e4bc"></i>
+                </div>
+                <h4>$4.96</h4>
+              </div>
+              <a href=""><i class="fa-solid fa-cart-shopping cart"></i></a></a>
+            </div>
+            <div class="pro">
+              <img src="img/products/n4.jpg" alt=""/>
+              <div class="dis">
+                <span>Mortal's</span>
+                <h5>casual cursive shirt </h5>
+                <div class="star">
+                  <i class="fas fa-star" style="color: #edb808"></i>
+                 <i class="fas fa-star" style="color:#edb808"></i>
+                 <i class="fas fa-star" style="color:#edb808"></i>
+                 <i class="fas fa-star" style="color:#dae2e4bc"></i>
+                 <i class="fas fa-star" style="color:#dae2e4bc"></i>
+                </div>
+                <h4>$9.4</h4>
+              </div>
+              <a href=""><i class="fa-solid fa-cart-shopping cart"></i></a></a>
+            </div>
+            <div class="pro">
+              <img src="img/products/n5.jpg" alt=""/>
+              <div class="dis">
+                <span>Nole'os</span>
+                <h5>dirty buleies gray shirt</h5>
+                <div class="star">
+                  <i class="fas fa-star" style="color: #edb808"></i>
+                 <i class="fas fa-star" style="color:#edb808"></i>
+                 <i class="fas fa-star" style="color:#edb808"></i>
+                 <i class="fas fa-star" style="color:#dae2e4bc"></i>
+                 <i class="fas fa-star" style="color:#dae2e4bc"></i>
+                </div>
+                <h4>$2.33</h4>
+              </div>
+              <a href=""><i class="fa-solid fa-cart-shopping cart"></i></a></a>
+            </div>
+            <div class="pro">
+              <img src="img/products/n6.jpg" alt=""/>
+              <div class="dis">
+                <span>cartoll's</span>
+                <h5>masive half phands</h5>
+                <div class="star">
+                  <i class="fas fa-star" style="color: #edb808"></i>
+                 <i class="fas fa-star" style="color:#edb808"></i>
+                 <i class="fas fa-star" style="color:#edb808"></i>
+                 <i class="fas fa-star" style="color:#edb808"></i>
+                 <i class="fas fa-star" style="color:#dae2e4bc"></i>
+                </div>
+                <h4>$3.94</h4>
+              </div>
+              <a href=""><i class="fa-solid fa-cart-shopping cart"></i></a></a>
+            </div>
+            <div class="pro">
+              <img src="img/products/n7.jpg" alt=""/>
+              <div class="dis">
+                <span>Moleaff's</span>
+                <h5>Brownies shade shirt</h5>
+                <div class="star">
+                  <i class="fas fa-star" style="color: #edb808"></i>
+                 <i class="fas fa-star" style="color:#edb808"></i>
+                 <i class="fas fa-star" style="color:#edb808"></i>
+                 <i class="fas fa-star" style="color:#dae2e4bc"></i>
+                 <i class="fas fa-star" style="color:#dae2e4bc"></i>
+                </div>
+                <h4>$4.1</h4>
+              </div>
+              <a href=""><i class="fa-solid fa-cart-shopping cart"></i></a></a>
+            </div>
+            <div class="pro">
+              <img src="img/products/n8.jpg" alt=""/>
+              <div class="dis">
+                <span>Jokees</span>
+                <h5>attractive black shirt</h5>
+                <div class="star">
+                  <i class="fas fa-star" style="color: #edb808"></i>
+                 <i class="fas fa-star" style
+                   ="color:#edb808"></i>
+                 <i class="fas fa-star" style="color:#edb808"></i>
+                 <i class="fas fa-star" style="color:#edb808"></i>
+                 <i class="fas fa-star" style="color:#dae2e4bc"></i>
+                </div>
+                <h4>$6.89</h4>
+              </div>
+              <a href=""><i class="fa-solid fa-cart-shopping cart"></i></a></a>
+            </div>
+            </div>
+        </section>
+        
+        <section id="sm-banner" class="section-m1">
+          <div class="banner-box">
+            <h4>crazy deals</h4>
+            <h2>buy 1 get 1 free</h2>
+            <span>The best classic dress is on sale at Black Bro's</span>
+            <button class="white">Learn more</button>
+          </div>
+          <div class="banner-box banner-box2">
+            <h4>spring/summer</h4>
+            <h2>upcoming season</h2>
+            <span>The best collective dress is on sale at Black Bro's</span>
+            <button class="white">collection</button>
+          </div>
+        </section>
+        
+        <section id="banner3">
+          <div class="banner-box">
+            <h2>SEASONAL SALE</h2>
+            <h3>Winter collection-50% OFF</h3>
+          </div>
+          <div class="banner-box banner-box2">
+            <h2>NEW FOOTWEAR COLLECTION</h2>
+            <h3>Spring/Summer-2023</h3>
+          </div>
+          <div class="banner-box banner-box3">
+            <h2>T-Shirt</h2>
+            <h3>New Trendy Print's</h3>
+          </div>
+        </section>
 
     <section id="newsletter" class="section-p1 section-m1">
         <div class="newstext">
@@ -388,42 +535,49 @@ $result = mysqli_query($conn, $sql);
     <div id="myModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
-              <body>
-                  <section id="form-details">
+              <section id="form-details">
                       <form action="" method="post" enctype="multipart/form-data">
                           <h2>Add your Products here...</h2>
-                          <input type="text" name="title" placeholder="Enter your blog title" name="title" required="">
-                          <textarea name="para" placeholder="Enter your Description"></textarea>
-                          <textarea name="para2" placeholder="Enter your Description"></textarea>
+                          <input type="text" name="brand" placeholder="Enter your Brand name" required="">
+                          <input type="text" name="title" placeholder="Enter your Products title" name="title" required="">
+                          <input type="number" placeholder="Enter your Product Rating in 0-5" name="rating" required="">
+                          <input type="number" placeholder="Enter your Price" name="price" required="">
+                          <input type="text" name="season" placeholder="Enter Season" required="">
+                          <input type="text" placeholder="Enter Category" name="category">
+                          <textarea name="para" placeholder="Enter your Description about product"></textarea>
                           <label>Image 1:</label>
                           <input type="file" name="img1" required=""><br>
                           <label>Image 2:</label>
                           <input type="file" name="img2">
+                          <label>Image 3:</label>
+                          <input type="file" name="img3">
+                          <label>Image 4:</label>
+                          <input type="file" name="img4">
                           <button class="normal" type="submit" name="submit">Submit</button>
                       </form>
                   </section>
               
-              <?php
-              $conn=mysqli_connect("0.0.0.0","root","root","ecommerce");
-              // Check connection
-              if (!$conn) {
-                die("Connection failed: " . mysqli_connect_error());
-              }
-              
+            <?php
               // Check if form is submitted
               if(isset($_POST['submit'])){
                   // Get form data
+                  $brand = $_POST['brand'];
                   $title = $_POST['title'];
-                  $para2 = $_POST['para2'];
+                  $rating = $_POST['rating'];
+                  $price = $_POST['price'];
+                  $season = $_POST['season'];
+                  $category = $_POST['category'];
                   $para = $_POST['para'];
               
                   // Convert images to base64
                   $img1 = base64_encode(file_get_contents($_FILES['img1']['tmp_name']));
                   $img2 = !empty($_FILES['img2']['tmp_name']) ? base64_encode(file_get_contents($_FILES['img2']['tmp_name'])) : NULL;
+                  $img3 = !empty($_FILES['img3']['tmp_name']) ? base64_encode(file_get_contents($_FILES['img3']['tmp_name'])) : NULL;
+                  $img4 = !empty($_FILES['img4']['tmp_name']) ? base64_encode(file_get_contents($_FILES['img4']['tmp_name'])) : NULL;
               
                   // SQL query to insert data into the table
-                  $sql = "INSERT INTO blog (title, para, para2, img, img2)
-                  VALUES ('$title', '$para' , '$para2' , '$img1', '$img2')";
+                  $sql = "INSERT INTO products (brand, name, rating, img1, img2, img3, img4, season, price, para)
+                  VALUES ('$brand', '$title', $rating, '$img1', '$img2', '$img3', '$img4', '$season', $price, '$para')";
               
               
                   // Execute query
@@ -436,7 +590,7 @@ $result = mysqli_query($conn, $sql);
                   // Close connection
                   mysqli_close($conn);
               }
-              ?>            
+            ?>
         </div>
     </div>
 

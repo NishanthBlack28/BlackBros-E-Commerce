@@ -184,10 +184,7 @@
   </section>
 
   <?php
-  $conn = mysqli_connect("0.0.0.0", "root", "root", "ecommerce"); // Corrected connection details
-  if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-  }
+  include("con-db.php");
   $items_per_page = 5;
   $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
   $start = ($current_page - 1) * $items_per_page;
