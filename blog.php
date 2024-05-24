@@ -1,6 +1,11 @@
+<?php 
+session_start();
+if (!isset($_COOKIE['user'])) {
+    setcookie("user", "testuser", time() + (86400 * 30)); // 30 days
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -188,7 +193,6 @@
   $items_per_page = 5;
   $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
   $start = ($current_page - 1) * $items_per_page;
-
   ?>
 
   <section id="page-header" class="blog-header">
@@ -220,10 +224,6 @@
 
 
 <?php
-$conn = mysqli_connect("0.0.0.0", "root", "root", "ecommerce");
-if (!$conn) {
-  die("Connection failed: " . mysqli_connect_error());
-}
 $items_per_page = 5;
 $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
 $start = ($current_page - 1) * $items_per_page;

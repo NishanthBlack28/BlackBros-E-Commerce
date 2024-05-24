@@ -261,6 +261,7 @@
           <div class="pro-container">
           <?php
           include("con-db.php");
+          
           $query = "SELECT * FROM products";
           $results = mysqli_query($conn, $query);
           
