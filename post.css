@@ -20,6 +20,12 @@
   color: #16fdbdca;
 }
 
+.post-title h5 {
+  transform: translateX(24px);
+  margin: 4px 0;
+  color: #dedcdc;
+}
+
 .blog-post-img{
   margin-left: 32px;
   padding: 8px .64px;

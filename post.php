@@ -41,7 +41,7 @@ $row = mysqli_fetch_assoc($result);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Black E-commerce/blog/post</title>
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="post.css">
     <style>
@@ -91,7 +91,11 @@ $row = mysqli_fetch_assoc($result);
             z-index: 9999;
             display: none;
         }
-
+        .post-title h5 {
+          transform: translateX(24px);
+          margin: 4px 0;
+          color: #94bcbc;
+        } 
         .copied-popup.show {
             display: block;
         }
@@ -145,8 +149,9 @@ $row = mysqli_fetch_assoc($result);
     $row = mysqli_fetch_assoc($result);
     echo '
           <div class="post-title">
-            <h4>'.$row["title"].'</h4>
-            <h6>'.$row["date"].'</h6>
+            <h4>  '.$row["title"].'</h4>
+            <h6>  '.$row["date"].'</h6>
+            <h5><i class="fa fa-soild fa-eye"></i><b>  '.$row["view"].'</b>&nbsp;&nbsp;<i class="bi bi-hand-thumbs-up"></i><b>  '.$row["view"].'</b></h5>
             <hr>
               <div class="blog-post-img">
                 <img src="data:image/webp;base64,' . $row["img"] . '">
